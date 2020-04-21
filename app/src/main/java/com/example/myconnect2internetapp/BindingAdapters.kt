@@ -5,6 +5,18 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myconnect2internetapp.network.MarsProperty
+import com.example.myconnect2internetapp.overview.PhotoGridAdapter
+
+/**
+ * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
+ */
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
+    val adapter = recyclerView.adapter as PhotoGridAdapter
+    adapter.submitList(data)
+}
 
 /**
  * Uses the Glide library to load an image by URL into an [ImageView]

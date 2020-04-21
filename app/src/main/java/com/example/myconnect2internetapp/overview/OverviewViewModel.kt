@@ -25,13 +25,13 @@ class OverviewViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    // Internally, we use a MutableLiveData, because we will be updating the MarsProperty with
-    // new values
-    private val _property = MutableLiveData<MarsProperty>()
+    // Internally, we use a MutableLiveData, because we will be updating the List of MarsProperty
+    // with new values
+    private val _properties = MutableLiveData<List<MarsProperty>>()
 
-    // The external LiveData interface to the property is immutable, so only this class can modify
-    val property: LiveData<MarsProperty>
-        get() = _property
+
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -57,7 +57,8 @@ class OverviewViewModel : ViewModel() {
                 // Await the completion of our Retrofit request
                 var listResult = getPropertiesDeferred.await()
                 if (listResult.isNotEmpty()) {
-                    _property.value = listResult[0]
+                    _status.value = "Success: ${listResult.size}"
+                    _properties.value = listResult
                 }
             } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
