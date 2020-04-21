@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myconnect2internetapp.R
 import com.example.myconnect2internetapp.databinding.FragmentOverviewBinding
 import com.example.myconnect2internetapp.databinding.GridViewItemBinding
+import com.example.myconnect2internetapp.network.MarsApiFilter
 
 
 /**
@@ -63,5 +64,20 @@ class OverviewFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.overflow_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    /**
+     * Updates the filter in the [OverviewViewModel] when the menu items are selected from the
+     * overflow menu.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.updateFilter(
+            when (item.itemId) {
+                R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
+                R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
+                else -> MarsApiFilter.SHOW_ALL
+            }
+        )
+        return true
     }
 }
