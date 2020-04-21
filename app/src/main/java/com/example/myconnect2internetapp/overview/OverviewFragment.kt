@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.myconnect2internetapp.R
 import com.example.myconnect2internetapp.databinding.FragmentOverviewBinding
+import com.example.myconnect2internetapp.databinding.GridViewItemBinding
 
 
 /**
@@ -28,8 +29,8 @@ class OverviewFragment : Fragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding = FragmentOverviewBinding.inflate(inflater)
-
+       // val binding = FragmentOverviewBinding.inflate(inflater)
+        val binding = GridViewItemBinding.inflate(inflater)
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
 
