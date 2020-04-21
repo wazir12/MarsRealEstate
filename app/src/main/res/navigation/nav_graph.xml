@@ -9,7 +9,13 @@
         android:id="@+id/detailFragment"
         android:name="com.example.myconnect2internetapp.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail"
+        >
+        <!-- TODO (12) Add selectedProperty argument of type MarsProperty -->
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.example.myconnect2internetapp.network.MarsProperty"/>
+    </fragment>
     <fragment
         android:id="@+id/overviewFragment"
         android:name="com.example.myconnect2internetapp.overview.OverviewFragment"

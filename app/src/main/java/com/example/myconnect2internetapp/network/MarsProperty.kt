@@ -1,6 +1,8 @@
 package com.example.myconnect2internetapp.network
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
 
 /**
@@ -8,9 +10,17 @@ import com.squareup.moshi.Json
  * or rental) and the price (monthly if it's a rental).
  * The property names of this data class are used by Moshi to match the names of values in JSON.
  */
+// TODO (11) Add @Parcelize annotation to MarsProperty and have it implement Parcelable
+@Parcelize
 data class MarsProperty(
     val id: String,
     // used to map img_src from the JSON to imgSrcUrl in our class
     @Json(name = "img_src") val imgSrcUrl: String,
     val type: String,
-    val price: Double)
+    val price: Double):Parcelable{
+    val isRental
+        get() = type == "rent"
+
+}
+
+// TODO (17) Add isRental Boolean property where get() = type == "rent"
