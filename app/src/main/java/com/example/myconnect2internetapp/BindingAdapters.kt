@@ -1,5 +1,6 @@
 package com.example.myconnect2internetapp
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -7,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myconnect2internetapp.network.MarsProperty
+import com.example.myconnect2internetapp.overview.MarsApiStatus
 import com.example.myconnect2internetapp.overview.PhotoGridAdapter
 
 /**
@@ -32,5 +34,28 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image))
             .into(imgView)
+    }
+}
+
+/**
+ * This binding adapter displays the [MarsApiStatus] of the network request in an image view.  When
+ * the request is loading, it displays a loading_animation.  If the request has an error, it
+ * displays a broken image to reflect the connection error.  When the request is finished, it
+ * hides the image view.
+ */
+@BindingAdapter("marsApiStatus")
+fun bindStatus(statusImageView: ImageView, status: MarsApiStatus?) {
+    when (status) {
+        MarsApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        MarsApiStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        MarsApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
     }
 }
